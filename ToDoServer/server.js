@@ -21,3 +21,4 @@ server.listen(2410,()=>{
     console.log('listening in 2410');
     console.log('====================================');
 })
+module.exports = server;

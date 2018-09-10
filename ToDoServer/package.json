@@ -4,7 +4,7 @@
   "description": "todo app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "todo",
@@ -16,5 +16,10 @@
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
