@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "d0e33ea8-8952-439a-bc33-ea0833a8c2bc",
+		"name": "ToDoServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add todo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViOTYyNjExNWNiNWMxMWVjMDJhYTVmYiIsImlhdCI6MTUzNjU2NjgwMSwiZXhwIjozMDczMjIwMDAyfQ.KeUbIbd76-NDaVT-9jRJjWP6Jpk4Ov5PMlkn9phBWqs"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"message\": \"1 message\",\n        \"completed\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2410/todo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"todo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get todos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViOTYyNjExNWNiNWMxMWVjMDJhYTVmYiIsImlhdCI6MTUzNjU2NjgwMSwiZXhwIjozMDczMjIwMDAyfQ.KeUbIbd76-NDaVT-9jRJjWP6Jpk4Ov5PMlkn9phBWqs"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"message\": \"5 message\",\n        \"completed\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2410/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete todo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViOTYxOTdmNWYzYjcwMWI3MjcwYTg4NSIsImlhdCI6MTUzNjU2MzYwNSwiZXhwIjozMDczMjEzNjEwfQ.yIdGc7fRqkSirfzGuvYMY6ZGP6Q8ZtqfNAh9d1KuTfY"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:2410/todo/5b961c055f3b701b7270a886",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"todo",
+						"5b961c055f3b701b7270a886"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update todo",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViOTYyNjExNWNiNWMxMWVjMDJhYTVmYiIsImlhdCI6MTUzNjU2NjgwMSwiZXhwIjozMDczMjIwMDAyfQ.KeUbIbd76-NDaVT-9jRJjWP6Jpk4Ov5PMlkn9phBWqs"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"message\": \"update mdde message\",\n    \"completed\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2410/todo/5b9626305cb5c11ec02aa5fc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"todo",
+						"5b9626305cb5c11ec02aa5fc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"email\":\"test@gmail.com\",\n       \"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2410/signUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"email\":\"test@gmail.com\",\n       \"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:2410/signIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2410",
+					"path": [
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
