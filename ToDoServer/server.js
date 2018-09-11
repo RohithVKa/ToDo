@@ -9,11 +9,11 @@ server.use(express.static("public"));
 routes(server)
 
 server.use((req, res, next)=>{
-    res.send(404, { error: 'Sorry not found' });
+    res.status(404).send({ error: "Sorry not found" });
 })
 
 server.use((err, req, res, next)=>{
-    res.send(500,{error:err.message});
+    res.status(500).send({ error: err.message });
 })
 
 server.listen(2410,()=>{

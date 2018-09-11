@@ -11,7 +11,7 @@ const getTodos = (req, res, next) => {
         if (error) {
           return next(error);
         }
-        res.send(200, { result: { message: 'ToDo list', data: result} })
+        res.status(200).send({ result: { message: 'ToDo list', data: result} })
     })
 
 }
@@ -20,7 +20,7 @@ const getTodos = (req, res, next) => {
 const addToDo = (req, res, next) => {
     
     if (!req.body.message) {
-        return res.send(409, { error: 'message is mandatory' });   
+        return res.status(409).send({ error: 'message is mandatory' });   
     }
 
     if (!req.body.completed) {
@@ -33,7 +33,7 @@ const addToDo = (req, res, next) => {
         }
         let todo = result.ops[0];
         todo.user = undefined;
-        res.send(201, { result: { message: 'Added', data: todo } });
+        res.status(201).send({ result: { message: 'Added', data: todo } });
     })
 
 };
@@ -44,7 +44,7 @@ const deleteToDo = (req, res, next) => {
          if (error) {
              return next(error);
          }
-        res.send(200, { result: { message: 'Deleted',data: req.params.id } })
+        res.status(200).send({ result: { message: 'Deleted',data: req.params.id } })
      })
 
 };
@@ -57,11 +57,11 @@ const updateToDo = (req, res, next) => {
         }
         if (result.value) {
             result.value.user = undefined;
-            res.send(200, {
+            res.status(200).send({
               result: { message: "Updated", data: result.value }
             });    
         } else {
-            res.send(404, { error: 'Not found' });   
+            res.status(404).send({ error: "Not found" });   
         }
     })
 

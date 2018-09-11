@@ -38,7 +38,7 @@ const hookJwtToken = (user) => {
 const signUp = (req, res, next) => {
     
     if (!hasCredentialInputs(req, res, next)){
-        return res.send(409, { error: 'email and password are mandatory!'})
+        return res.status(409).send({ error: 'email and password are mandatory!'})
     }
 
     req.body.password = hashedPassword(req.body.password)
@@ -49,7 +49,7 @@ const signUp = (req, res, next) => {
         }
 
         const user = hookJwtToken(result.ops[0])
-        res.send(201, { result: { message: 'Signed up successfully!', data: user } });
+        res.status(201).send({ result: { message: 'Signed up successfully!', data: user } });
     })
 
 };
@@ -57,7 +57,7 @@ const signUp = (req, res, next) => {
 const signIn = (req, res, next) => {
 
     if (!hasCredentialInputs(req, res, next)) {
-        return res.send(409, { error: 'email and password are mandatory!'})
+        return res.status(409).send({ error: 'email and password are mandatory!'})
     }
 
     usersCollection().findOne({email:req.body.email},(error, result)=>{
@@ -67,9 +67,9 @@ const signIn = (req, res, next) => {
 
         if (result && result.password == hashedPassword(req.body.password)) {
             const user = hookJwtToken(result)
-            res.send(200, { result: { message: 'Signed in successfully!', data: user } })
+            res.status(200).send({ result: { message: 'Signed in successfully!', data: user } })
         } else {
-            res.send(401,{ error: 'Sorry! Invalid email / password' })
+            res.status(401).send({ error: 'Sorry! Invalid email / password' })
         }
     })
 
