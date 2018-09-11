@@ -13,7 +13,7 @@ const isValidUser = (req, res, next)=>{
 
         if (result) {
             req.user = result
-            next()
+            return next()
         } else {
             res.status(401).send({ error: 'Sorry! Please try again!' })
         }
@@ -28,7 +28,7 @@ const isValidUserToSignUp = (req, res, next) => {
         }
 
         if (!result) {
-            next()
+            return next()
         } else {
             res.status(409).send({error:'Sorry! already you are with us! please try to login!'})
         }

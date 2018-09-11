@@ -15,14 +15,14 @@ const isAutherisedUser = (req, res, next) => {
         jwt.verify(token, config.jwtSecret,(error, decoded)=>{
             if (error) {
                 if (error.name == 'TokenExpiredError') {
-                    res.status(403).send( { error: 'Token Expired' })    
+                    return res.status(403).send( { error: 'Token Expired' })    
                 } else {
-                    res.status(401).send({ error: 'Failed to authenticate token' })
+                    return res.status(401).send({ error: 'Failed to authenticate token' })
                 }                
             }
 
             if (!decoded || !decoded.id) {
-                res.status(500).send({ error: 'Invalid token' })
+                return res.status(500).send({ error: 'Invalid token' })
             }
 
             usersCollection().findOne({ _id: ObjectId(decoded.id) }, (error, result) => {
@@ -32,15 +32,15 @@ const isAutherisedUser = (req, res, next) => {
 
                 if (result) {
                     req.user = result
-                    next()
+                    return next()
                 } else {
-                    res.status(401).send({ error: 'Sorry! Please try again!' })
+                    return res.status(401).send({ error: 'Sorry! Please try again!' })
                 }
             })
 
         })
     } else {
-        res.status(401).send("You are not autherised user!");
+        return res.status(401).send("You are not autherised user!");
     }
     
 }

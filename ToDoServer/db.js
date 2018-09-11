@@ -10,7 +10,7 @@ const connect = (callback) => {
 
     const MongoClient = require("mongodb").MongoClient;
 
-    MongoClient.connect(config.db,(error, result)=>{
+    MongoClient.connect(config.db, { useNewUrlParser: true },(error, result)=>{
         if (error) {
             console.log('====================================');
             console.log('Error on DB connection',error);
@@ -22,9 +22,9 @@ const connect = (callback) => {
         if (callback) {
             callback(db);    
         }        
-        console.log('====================================');
-        console.log('db connected');
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log('db connected');
+        // console.log('====================================');
     });
 
 }
