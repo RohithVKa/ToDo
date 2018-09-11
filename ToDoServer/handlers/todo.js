@@ -18,6 +18,14 @@ const getTodos = (req, res, next) => {
 
 
 const addToDo = (req, res, next) => {
+    
+    if (!req.body.message) {
+        return res.send(409, { error: 'message is mandatory' });   
+    }
+
+    if (!req.body.completed) {
+        req.body.completed = false
+    }
 
     todosCollection().insertOne({...req.body,user:req.user._id}, (error, result) => {
         if (error) {

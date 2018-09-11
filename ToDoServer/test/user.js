@@ -13,10 +13,8 @@ const usersCollection = () => {
 
 describe('User',()=>{
     before((done)=>{
-        db.connect(()=>{
             usersCollection().drop()
             done()
-        })
     })
 
     let user = {
