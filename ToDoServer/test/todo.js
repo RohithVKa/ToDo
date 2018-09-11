@@ -13,6 +13,7 @@ const todosCollection = () => {
 
 describe('ToDo', () => {
     let token;
+    let pulledTodo;
     before((done) => {
         db.connect(() => {
             todosCollection().drop()
@@ -34,7 +35,7 @@ describe('ToDo', () => {
         completed: false
     }
 
-    describe('Add ToDo', () => {
+    describe('Add a ToDo', () => {
 
         it("should check token input existance", done => {
             chai
@@ -89,6 +90,7 @@ describe('ToDo', () => {
                 .send(todo)
                 .end((error, response) => {
                     response.should.have.status(201)
+                    pulledTodo = response.body.result.data._id
                     expect(response.body).to.have.nested.property('result.data._id')
                     expect(response.body).to.have.nested.property("result.data.completed", true);
                     done()
@@ -97,65 +99,128 @@ describe('ToDo', () => {
     })
 
 
-      describe('Add ToDo', () => {
+      describe('Get ToDos', () => {
 
         it("should check token input existance", done => {
             chai
                 .request(server)
-                .post("/todo")
-                .send(todo)
+                .get("/todos")
                 .end((error, response) => {
                     response.should.have.status(401);
                     done();
                 });
         });   
         
-        it("should check message input existance", done => {
-            todo.message = undefined;
+        it("should allow user to get todo list", done => {
             chai
                 .request(server)
-                .post("/todo")
+                .get("/todos")
                 .set({token:token})
-                .send(todo)
                 .end((error, response) => {
-                    response.should.have.status(409);
+                    response.should.have.status(200);
                     done();
                 });
         });   
 
-        it("should add todo by default as not completed", done => {
-            todo.message = 'a message'
-            todo.completed = undefined
-
+        it("should throw error on invalid user id", done => {
             chai
                 .request(server)
-                .post("/todo")
-                .set({ token: token })
-                .send(todo)
+                .get("/todos")
+                .set({ token: 'sfsdfdfdsfdsfsd' })
                 .end((error, response) => {
-                    response.should.have.status(201);
-                    expect(response.body).to.have.nested.property("result.data.completed",false);
-                    expect(response.body).to.have.nested.property("result.data._id");
+                    response.should.have.status(401);
                     done();
                 });
         });   
+    })
 
+    describe('Update a ToDo', () => {
 
-        it('should add a todo', (done) => {
-            todo.message = 'a message'
-            todo.completed = true
-
+        it("should check token input existance", done => {
             chai
                 .request(server)
-                .post("/todo")
-                .set({ token: token })
-                .send(todo)
+                .patch(`/todo/${pulledTodo}`)
                 .end((error, response) => {
-                    response.should.have.status(201)
-                    expect(response.body).to.have.nested.property('result.data._id')
+                    response.should.have.status(401);
+                    done();
+                });
+        });
+
+        it("should allow user to update(completed) a todo", done => {
+            chai
+                .request(server)
+                .patch(`/todo/${pulledTodo}`)
+                .set({ token: token })
+                .send({completed: true})
+                .end((error, response) => {
+                    response.should.have.status(200);
                     expect(response.body).to.have.nested.property("result.data.completed", true);
-                    done()
+                    done();
                 });
-        })
+        });
+
+
+        it("should allow user to update(message) a todo", done => {
+            chai
+              .request(server)
+              .patch(`/todo/${pulledTodo}`)
+              .send({ message: 'updated message' })
+              .set({ token: token })
+              .end((error, response) => {
+                response.should.have.status(200);
+                expect(response.body).to.have.nested.property("result.data.message", 'updated message');
+                done();
+              });
+        });
+
+
+        it("should throw error on invalid user id", done => {
+            chai
+              .request(server)
+              .patch(`/todo/${pulledTodo}`)
+              .set({ token: "sfsdfdfdsfdsfsd" })
+              .send({ message: 'updated message' })
+              .end((error, response) => {
+                response.should.have.status(401);
+                done();
+              });
+        });
+    })
+
+    describe('Delete a ToDo', () => {
+
+        it("should check token input existance", done => {
+            chai
+                .request(server)
+                .delete(`/todo/${pulledTodo}`)
+                .end((error, response) => {
+                    response.should.have.status(401);
+                    done();
+                });
+        });
+
+        it("should allow user to delete a todo", done => {
+            chai
+              .request(server)
+              .delete(`/todo/${pulledTodo}`)
+              .send({ message: 'updated message' })
+              .set({ token: token })
+              .end((error, response) => {
+                response.should.have.status(200);
+                done();
+              });
+        });
+
+        it("should throw error on invalid user id", done => {
+            chai
+              .request(server)
+              .delete(`/todo/${pulledTodo}`)
+              .set({ token: "sfsdfdfdsfdsfsd" })
+              .send({ message: 'updated message' })
+              .end((error, response) => {
+                response.should.have.status(401);
+                done();
+              });
+        });
     })
 })

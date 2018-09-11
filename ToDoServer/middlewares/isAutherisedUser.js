@@ -17,7 +17,7 @@ const isAutherisedUser = (req, res, next) => {
                 if (error.name == 'TokenExpiredError') {
                     res.send(403, { error: 'Token Expired' })    
                 } else {
-                    res.send(500, { error: 'Failed to authenticate token' })
+                    res.send(401, { error: 'Failed to authenticate token' })
                 }                
             }
 
