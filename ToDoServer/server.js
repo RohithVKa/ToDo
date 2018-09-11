@@ -18,7 +18,7 @@ server.use((err, req, res, next)=>{
 
 server.listen(2410,()=>{
     console.log('====================================');
-    console.log('listening in 2410');
+    console.log((!process.env.NODE_ENV ? "development" : process.env.NODE_ENV).toUpperCase() + ` server is listening at port:2410 `);
     console.log('====================================');
 })
 module.exports = server;

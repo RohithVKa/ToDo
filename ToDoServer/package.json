@@ -4,7 +4,9 @@
   "description": "todo app",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "dev": "NODE_ENV=development node server.js",
+    "prod": "NODE_ENV=production node server.js",
+    "test": "mocha --exit"
   },
   "keywords": [
     "todo",
