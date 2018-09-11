@@ -21,7 +21,7 @@ const isAutherisedUser = (req, res, next) => {
                 }                
             }
 
-            if (!decoded) {
+            if (!decoded || !decoded.id) {
                 res.status(500).send({ error: 'Invalid token' })
             }
 
