@@ -7,10 +7,10 @@ const should = chai.should()
 const expect = chai.expect;
 const db = require('../db')
 
-const todosCollection = () => {
+const todosCollection = ( ) => {
     return dbConnect().collection("todos");
 };
-
+ 
 describe('ToDo', () => {
     let token;
     let pulledTodo;
