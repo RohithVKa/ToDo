@@ -1,7 +1,12 @@
 import {combineReducers} from 'react';
 import todos from './todos'
+import user from './user'
+import error from './error'
+
 const rootReducer = combineReducers({
-    todos
+    user,
+    todos,
+    error,
 });
 
 export default rootReducer;

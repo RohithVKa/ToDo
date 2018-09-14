@@ -1,14 +1,12 @@
+
+
 const initialState = {
    todos:[]
 }
 const todos = (state = initialState, action) => {
     switch (action.type) {
-        case GET_TODO:
-            
-            break;
         case GOT_TODO:
             return action.payload.todos;
-            break;
         default:
             return state;
         // case ADD_TODO:
