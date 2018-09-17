@@ -19,7 +19,7 @@ export function getToDos() {
 
 const receivedAction = function receivedToDos(todos){
     return {
-        type: GOT_TODO,
+        type: 'GOT_TODO',
         payload: {todos}
     }
 }

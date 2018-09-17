@@ -39,14 +39,14 @@ export function signUp(email, password) {
 
 const signInAction = function receivedToDos(payload) {
     return {
-        type: SIGN_IN,
+        type: 'SIGN_IN',
         payload
     }
 }
 
 const signUpAction = function receivedToDos(payload) {
   return {
-    type: SIGN_UP,
+    type: 'SIGN_UP',
     payload
   };
 };

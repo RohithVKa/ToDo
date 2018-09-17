@@ -1,4 +1,4 @@
-import {combineReducers} from 'react';
+import {combineReducers} from 'redux';
 import todos from './todos'
 import user from './user'
 import error from './error'
